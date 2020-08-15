@@ -1,0 +1,63 @@
+<section class="container" style="margin-top:4%;">
+ <form novalidate [formGroup]="userForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective formControlName="firstname" type="text" class="form-control" required>
+        <label>الاسم</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i> 
+        <input mdbInputDirective formControlName="lastname" type="text" class="form-control" required>
+        <label>الكنية</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective formControlName="username" type="text" class="form-control" required>
+        <label>اسم المستخدم</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective formControlName="email" type="email" class="form-control" required>
+        <label>الايميل</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective formControlName="telnum" type="tel" pattern="[0-9]*" class="form-control" required>
+        <label>رقم التلفون</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <td >
+        <mat-slide-toggle formControlName="admin" class="an-admin"> <b>Will be an admin?</b> </mat-slide-toggle>
+      </td>
+    </div>
+    <div class="col-md-6">
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective formControlName="password" type="password" class="form-control" required>
+        <label>كلمة السر</label>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="md-form">
+        <i class="fa fa-envelope prefix"></i>
+        <input mdbInputDirective formControlName="repassword" type="password" class="form-control" required>
+        <label>تأكيد كلمة السر</label>
+      </div>
+    </div>
+    <div class="col-md-2 center mr">
+      <button class="btn btn-success btn-block" style="font-size:20px" mdbWavesEffect [disabled]="userForm.invalid">إضافة</button>
+    </div>
+  </div>
+ </form>
+</section>

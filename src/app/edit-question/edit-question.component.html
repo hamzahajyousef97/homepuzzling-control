@@ -1,0 +1,27 @@
+<div class="container" style="margin-top: 7%" *ngIf="question">
+  <div class="col-md-4 center sm">
+    <div class="card card-body" dir="rtl">
+        <p class="h4 h4-responsive text-center">تعديل السؤال <br> {{question.question}}</p>
+    </div>
+  </div>
+  <form novalidate [formGroup]="questionForm" #fform="ngForm" (ngSubmit)="onSubmit()" style=" margin-bottom: 2.5%;">
+    <div class="row">
+      <div class="col-md-12" style="margin-bottom: 1.5; margin-top: 5%;">
+        <h2 class="text-center">العربية</h2>
+        <div class="md-form">
+            <i class="fa fa-envelope prefix"></i>
+            <input mdbInputDirective formControlName="question" [(ngModel)]="question.question" type="text" class="form-control" required>
+            <label>قم بكتابة السؤال </label>
+        </div>
+        <div class="md-form">
+          <i class="fa fa-envelope prefix"></i>
+          <input mdbInputDirective formControlName="optionNum" [(ngModel)]="question.optionNum" type="number" class="form-control" required>
+          <label>عدد خيارات السؤال</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-2 col-xl-2 col-6 center" style="margin-top:10%">
+      <button class="btn btn-warning btn-block" style="font-size:20px" [disabled]="questionForm.invalid" mdbWavesEffect type="submit">تعديل</button>
+    </div>
+  </form>
+</div>

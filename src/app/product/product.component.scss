@@ -1,0 +1,27 @@
+.gallery a {
+    transition: all 0s;
+}
+.gallery a:hover {
+    filter: brightness(0.7);
+    transition: all 0s ease-in-out;
+}
+// a .test {
+//     opacity: 0;
+//     position: absolute;
+// }
+// a:hover .test {
+//     opacity: 1;
+//     position: absolute;
+//     bottom: 0px;
+// }
+
+.column {
+    float: left;
+    width: 33.3333333333333333333333333333333%;
+    padding: 10px;
+}
+.column img {
+    margin-top: 12px;
+    width:100%;
+}
+  

@@ -1,0 +1,127 @@
+<table class="table table-striped" style="margin-top: 4%;">
+<thead>
+    <tr class="row-name text-align">
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Settings</th>
+    </tr>
+</thead>   
+  <tbody  *ngFor="let user of users; let i = index;">
+    <tr class="row-content text-align">
+        <td>{{ user._id }}</td>
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td>{{ user.username }}</td>    
+        <td>
+          <button class="btn btn-info edit fa fa-pencil-square-o" aria-hidden="true" (click)="basicModal.show()"></button>
+          <button class="btn btn-danger edit" (click)="Modal.show()">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </td>
+    </tr>
+
+    <div mdbModal #Modal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    do you want to delelte this User ?
+                </div>
+                <div class="modal-body">
+                    <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="Modal.hide()" mdbWavesEffect>Close</button>
+                    <button class="btn btn-danger edit" (click)="deleteUser(user._id, i); Modal.hide()"  mdbBtn color="danger" class="relative waves-light" mdbWavesEffect>Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div mdbModal #basicModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true">
+     <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <mat-slide-toggle fxFlex [(ngModel)]="put" [color]="Warn">
+                  <h5 style="margin-top:21%;">تعديل</h5>
+                </mat-slide-toggle>
+                <div fxFlex="40" *ngIf="user">
+                </div>  
+                <h4 class="modal-title w-100" id="myModalLabel">{{user.username}}</h4>
+            </div>
+            <div class="modal-body">
+              <section class="row">
+               <div class="col-md-6">
+                  <span>First & Lastname: {{ user.firstname }} {{ user.lastname }}</span>
+               </div>
+               <div class="col-md-6">
+                  <span>Username: {{ user.username }}</span>
+               </div>
+               <div class="col-md-12">
+                  <span>Email: {{ user.email }}</span>
+               </div>
+               <div class="col-md-12">
+                  <span>Tel: {{ user.telnum }}</span>
+               </div>
+               <div class="col-md-12">
+                  <span>Id: {{ user._id }}</span>
+               </div>
+              </section>
+              <section *ngIf="put">
+                <form [formGroup]="userForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <input mdbInputDirective formControlName="lastname" type="text"  class="form-control" value="{{ user.lastname }}">
+                                <label for="form2">الكنية</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <input mdbInputDirective formControlName="firstname" type="text"  class="form-control"  value="{{ user.firstname }}">
+                                <label for="form2">الأسم</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <input mdbInputDirective formControlName="username" type="text"  class="form-control"  value="{{ user.username }}">
+                                <label for="form2">أسم المستخدم</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <input mdbInputDirective formControlName="tel" pattern="[0-9]*" type="tel"  class="form-control"  value="{{ user.telnum }}">
+                                <label for="form2">الهاتف</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <input mdbInputDirective formControlName="email" type="email"  class="form-control"  value="{{ user.email }}">
+                                <label for="form2">البريد الإلكتروني</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6"> 
+                            <div class="md-form">
+                                <mat-checkbox formControlName="admin">
+                                    {{user.admin}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </form> 
+              </section>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>إلغاء</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (ngSubmit)="onSubmit()">حفظ!</button>
+            </div>
+        </div>
+    </div >
+  </div >
+  </tbody>
+</table>
+
+<!-- <button type="button" mdbBtn color="primary" class="relative waves-light"  mdbWavesEffect> Launch demo modal</button > -->

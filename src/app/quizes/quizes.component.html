@@ -1,0 +1,59 @@
+<div class="container sm" style="margin-top:7.8%;">
+    <h5 class="card-title text-center" *ngIf="quizes">عدد المشاهدات لجميع الاختبارات <span style="font-weight: 900;">{{sumQuizViews}}</span></h5>
+    <div class="col-md-12">
+        <mat-form-field style="width: 100%;" class="example-full-width">
+            <mat-label><i class="fa fa-search prefix"></i> Search </mat-label>
+            <input matInput type="search" placeholder="ابحث باسم او رابط او شرح او نوع الامتحان" [(ngModel)]="searchText" value="Sushi">
+        </mat-form-field>
+    </div>
+    <br><br>
+    <div class="row" style="margin-top: 5%;">
+        <div class="col-md-5 center" style="margin-bottom:5%" *ngFor="let quiz of quizes | filter:searchText; let i = index;">
+            <div class="card center">
+                <div class="card-body" dir="rtl">
+                    <h5 class="card-title text-right">رابط الامتحان: {{quiz.link}}</h5>
+                    <p class="card-text text-right">اسم الامتحان: {{quiz.name}}</p>
+                    <p class="card-text text-right">شرح الامتحان: {{quiz.description}}</p>
+                    <p class="card-text text-right">نوع الامتحان: {{quiz.quizType}}</p>
+                    <p class="card-text text-right">مدة الامتحان: {{quiz.time}} ثانية</p>
+                    <p class="card-text text-right">عدد المشاهدات {{quiz.quizViews}}</p>
+                    <div class="row">
+                        <div class="col-md-5 col-xl-6 col-lg-6 col-12">
+                            <a class="btn btn-warning btn-block" [routerLink]="['/edit-quiz', quiz.link]">تعديل </a>
+                        </div>
+                        <div class="col-md-5 col-xl-6 col-lg-6 col-12">
+                            <a class="btn btn-primary float-right text-center btn-block" [routerLink]="['/add-questions', quiz.link]">عرض واضافة اسئلة</a>
+                        </div>
+                        <div class="col-md-5 col-xl-6 col-lg-6 col-12" style="margin-top: 3%">
+                            <a class="btn btn-success float-right text-center btn-block" [href]="[website + 'quiz/' + quiz.link]">عرض بالموقع</a>
+                        </div>
+                        <div class="col-md-5 col-xl-6 col-lg-6 col-12" style="margin-top: 3%">
+                            <button class="btn btn-danger btn-block" (click)="basicModal.show()">حذف</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div mdbModal #basicModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"aria-hidden="true">
+                <div class="modal-dialog" dir="rtl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            هل تريد حذف هذا الامتحان ؟
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-7 center">
+                                <button type="button"(click)="delete_quiz(quiz.link, i); basicModal.hide()"  mdbBtn color="danger" class="relative waves-light" mdbWavesEffect>نعم</button>
+                                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>إلغاء</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top:80px" *ngIf="errMess">
+    <h3 class="arabic text-center">لقد حدث خطأ في الخادم اذهب الى <a routerLink="/">الصفحة الرئيسية</a></h3>
+</div>
+<div [hidden]="quizes || errMess">
+    <mat-spinner class="center"></mat-spinner><h4 style="margin-top: 20px;" class="text-center">جاري التحميل انتظر قليلاً</h4>
+</div>

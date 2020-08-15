@@ -1,0 +1,17 @@
+<div class="wrapper fadeInDown" style="margin-top: 5%;">
+  <div id="formContent">
+      <div [hidden]="errMess" style="font-weight:800; margin-bottom: 2%">Login</div>
+      <div *ngIf="errMess" style="font-weight:800; margin-bottom: 2%">
+          <h6 style="color:red">Password or Username is incorrect!!</h6>
+      </div>
+    <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <input type="text" id="login" class="fadeIn second" placeholder="Username" [(ngModel)]="user.username" name="username" #username="ngModel">
+      <input type="password" id="password" class="fadeIn third" placeholder="Password" [(ngModel)]="user.password" name="password" #password="ngModel">
+      <span [hidden]="loading"><button style="margin-bottom:6%" type="submit" class="btn btn-primary">Login</button></span>
+      <span *ngIf="loading"><button style="margin-bottom:6%" type="submit" class="btn btn-primary disabled">Logging in <i style="margin-left:3px" class="fa fa-spinner fa-spin fa-lg"></i></button></span>
+    </form>
+    <!-- <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div> -->
+  </div>
+</div>

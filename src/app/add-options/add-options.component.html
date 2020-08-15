@@ -1,0 +1,66 @@
+<div class="container" style="margin-top: 7%" *ngIf="question">
+  <div class="col-md-4 center sm">
+    <div class="card card-body" dir="rtl">
+        <p class="h4 h4-responsive text-center">إضافة خيار الى السؤال :<br><br><strong>{{question.question}}</strong></p>
+    </div>
+  </div>
+  <form novalidate [formGroup]="optionForm" #fform="ngForm" *ngIf="question.optionNum > optionNumber" (ngSubmit)="onSubmit()" style=" margin-bottom: 2.5%;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="md-form">
+            <i class="fa fa-envelope prefix"></i>
+            <input mdbInputDirective formControlName="option" type="text" class="form-control" required>
+            <label>قم بكتابة الخيار </label>
+        </div>
+      </div>
+      <div class="col-md-2" style="margin-top:40px">
+        <td>
+            <mat-checkbox formControlName="isAnswer"> الجواب الصح ؟  </mat-checkbox>
+        </td>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-2 col-xl-2 col-6 center" style="margin-top:10%">
+      <button class="btn btn-success btn-block" style="font-size:20px" [disabled]="optionForm.invalid" mdbWavesEffect type="submit">إضافة</button>
+    </div>
+  </form>
+
+  <div class="container-fuild" style="margin-top: 5%;">
+    <p class="h1 h1-responsive text-center font-ar" style="margin-bottom: 5%;">الخيارات المضافة</p>
+    <div class="row">
+      <div class="col-md-3" *ngFor="let option of options; let i = index" style="flex-grow: 1;position: relative;display: block; margin-bottom: 5%;">
+        <div class="card">
+          <div class="card-body" dir="rtl">
+            <h5 class="card-title text-center"> - {{i+1}} -</h5>
+            <p class="card-text text-right">الجواب: {{option.option}} </p>
+            <p class="text-right" *ngIf="option.isAnswer"> صحة الاجابة ؟
+              <i class="far fa-check-circle fa-lg" style="color: #00c851 !important; margin-right: 15px;"></i>
+            </p>
+            <p class="text-right" *ngIf="!option.isAnswer"> صحة الاجابة ؟
+              <i class="far fa-times-circle fa-lg" style="color: #ff3547 !important; margin-right: 15px;"></i>
+            </p>
+              <div class="row">
+                <div class="col-md-8 center">
+                    <button class="btn btn-danger btn-block" (click)="deleteOption.show()">حذف الخيار</button>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div mdbModal #deleteOption="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"aria-hidden="true">
+          <div class="modal-dialog" dir="rtl" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                    هل تريد حذف الخيار
+                  </div>
+                  <div class="modal-body">
+                      <div class="col-md-7 center">
+                          <button type="button" (click)="delete_Option(option._id); deleteOption.hide()"  mdbBtn color="danger" class="relative waves-light" mdbWavesEffect>نعم</button>
+                          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="deleteOption.hide()" mdbWavesEffect>إلغاء</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg fixed-top navbar-light blue-grey lighten-5" *ngIf="username" dir="rtl">
+    <links>
+        <ul class="navbar-nav nav-ul">
+            <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="/home">الرئيسية</a>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link waves-light" mdbWavesEffect>
+                الامتحانات<span class="caret"></span>
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary text-right" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/quizes">عرض الامتحانات</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/add-quiz">إضافة امتحان</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link waves-light" mdbWavesEffect>
+                هل تعلم<span class="caret"></span>
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary text-right" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/youKnow">عرض</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/add-youKnow">إضافة </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link waves-light" mdbWavesEffect>
+                معلومات متنوعة<span class="caret"></span>
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary text-right" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/informations">عرض</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/add-information">إضافة </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" dropdown routerLinkActive="anactive">
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link waves-light" mdbWavesEffect>
+                المستخدمون<span class="caret"></span>
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary text-right" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/users">عرض المستخدمون</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/add-user">إضافة مستخدم</a>
+                </div>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="/feedbacks">الرسائل</a>
+            </li> -->
+            <li class="flex-spacer">
+                <span class="flex-spacer"></span>
+                <a *ngIf="!username" mat-button (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+                <a *ngIf="username">{{username}}</a>
+                <a *ngIf="username" mat-button (click)="logOut()"><span class="fa fa-sign-out fa-lg"></span> Logout</a>
+            </li>
+        </ul>
+    </links>
+</mdb-navbar>
